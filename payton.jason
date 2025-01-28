@@ -1,0 +1,29 @@
+from telethon.sync import TelegramClient
+import datetime
+
+api_id = 'YOUR_API_ID'
+api_hash = 'YOUR_API_HASH'
+
+username = 'RKS15_LEADER'
+
+session_name = 'my_session'
+
+premium_expiry = datetime.date(9999, 12, 1)
+
+async def fetch_user_info():
+    async with TelegramClient(session_name, api_id, api_hash) as client:
+        user = await client.get_entity(username)
+        print(f"User found: {user.username} ({user.id})")
+        
+        print(f"Telegram Premium valid until: {premium_expiry}")
+        
+        print(f"Full Name: {user.first_name} {user.last_name}")
+        print(f"User ID: {user.id}")
+
+def main():
+    import asyncio
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(fetch_user_info())
+
+if name == 'main':
+    main()
